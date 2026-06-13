@@ -48,6 +48,15 @@ python3 -m market_agent.cli report --market us
 python3 -m market_agent.cli report --market kr
 ```
 
+Add news-based interpretation:
+
+```bash
+python3 -m market_agent.cli report --market us --with-news
+python3 -m market_agent.cli report --market kr --with-news
+```
+
+The news interpretation uses Google News RSS. It should be treated as a catalyst hypothesis, not a confirmed reason for price movement.
+
 Reports are written under `reports/us/` and `reports/kr/`. The default configuration is stored in `config/markets.json`.
 
 ## Suggested Schedule

@@ -1,7 +1,7 @@
 from collections import defaultdict
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
-from .models import MarketRow, ReportContext
+from .models import MarketRow, NewsInterpretation, ReportContext
 from .scoring import ranked_with_scores
 
 
@@ -32,7 +32,11 @@ def sector_summary(rows: Iterable[MarketRow], market: str) -> List[Tuple[str, in
     return sorted(summary, key=lambda item: item[2], reverse=True)
 
 
-def generate_report(context: ReportContext, rows: List[MarketRow]) -> str:
+def generate_report(
+    context: ReportContext,
+    rows: List[MarketRow],
+    news_interpretations: Optional[Dict[str, NewsInterpretation]] = None,
+) -> str:
     ranked = ranked_with_scores(rows)
     source_label = "샘플 데이터" if context.sample else "무료 API 데이터"
 
@@ -43,6 +47,7 @@ def generate_report(context: ReportContext, rows: List[MarketRow]) -> str:
         f"- 데이터: {source_label}",
         f"- 목적: 투자 아이디어 발굴",
         f"- 선별 기준: 거래대금 상위 {context.top_n}개",
+        f"- 뉴스 해석: {'포함' if context.with_news else '미포함'}",
         "",
         "## 1. 시장 관심 요약",
         "",
@@ -96,18 +101,48 @@ def generate_report(context: ReportContext, rows: List[MarketRow]) -> str:
             reason_parts.append(f"거래대금 변화 {format_pct(value_change)}")
         lines.append(f"- {row.name} ({row.symbol}): {', '.join(reason_parts)}")
 
+    if context.with_news:
+        lines += [
+            "",
+            "## 4. 뉴스 기반 상승/하락 해석",
+            "",
+        ]
+        interpretations = news_interpretations or {}
+        for rank, row, score in ranked[:10]:
+            interpretation = interpretations.get(row.symbol)
+            if interpretation is None:
+                lines.append(f"### {row.name} ({row.symbol})")
+                lines.append("")
+                lines.append("- 해석: 뉴스가 수집되지 않았습니다.")
+                lines.append("- 신뢰도: 낮음")
+                lines.append("")
+                continue
+            lines.append(f"### {row.name} ({row.symbol})")
+            lines.append("")
+            lines.append(f"- 등락률: {format_pct(row.change_pct)}")
+            lines.append(f"- 방향: {interpretation.direction}")
+            lines.append(f"- 해석: {interpretation.summary}")
+            lines.append(f"- 신뢰도: {interpretation.confidence}")
+            lines.append("- 관련 뉴스:")
+            for item in interpretation.items[:3]:
+                if item.link:
+                    lines.append(f"  - [{item.title}]({item.link}) - {item.source}")
+                else:
+                    lines.append(f"  - {item.title} - {item.source}")
+            lines.append("")
+
     lines += [
         "",
-        "## 4. 다음 체크 포인트",
+        f"## {5 if context.with_news else 4}. 다음 체크 포인트",
         "",
         "- 거래대금 상위 종목이 같은 섹터에 반복적으로 몰리는지 확인합니다.",
         "- 거래대금 증가와 가격 상승이 동시에 나타나는 종목을 우선 관찰합니다.",
         "- 거래대금은 크지만 가격이 약한 종목은 분산/매물 출회 가능성을 따로 점검합니다.",
-        "- 다음 버전에서 뉴스, 공시, 외국인/기관 수급을 추가하면 아이디어 품질이 올라갑니다.",
+        "- 뉴스 해석은 원인 확정이 아니라 가능한 촉매 후보로 해석합니다.",
+        "- 다음 버전에서 공시, 외국인/기관 수급을 추가하면 아이디어 품질이 올라갑니다.",
         "",
         "_본 리포트는 투자 아이디어 발굴용이며 매수/매도 추천이 아닙니다._",
         "",
     ]
 
     return "\n".join(lines)
-

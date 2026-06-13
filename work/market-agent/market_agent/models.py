@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import List, Optional
 
 
 @dataclass(frozen=True)
@@ -28,4 +28,21 @@ class ReportContext:
     report_date: str
     top_n: int
     sample: bool
+    with_news: bool = False
 
+
+@dataclass(frozen=True)
+class NewsItem:
+    title: str
+    source: str
+    link: str
+    published: str = ""
+
+
+@dataclass(frozen=True)
+class NewsInterpretation:
+    symbol: str
+    direction: str
+    summary: str
+    confidence: str
+    items: List[NewsItem]

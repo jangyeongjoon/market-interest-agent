@@ -5,6 +5,7 @@ from pathlib import Path
 from .config import default_config_path, load_config, project_root
 from .data_sources import fetch_market_rows, top_by_traded_value
 from .models import ReportContext
+from .news import collect_news, interpret_all
 from .report import generate_report
 
 
@@ -31,8 +32,16 @@ def build_report(args: argparse.Namespace) -> Path:
         report_date=report_date,
         top_n=top_n,
         sample=args.sample,
+        with_news=args.with_news,
     )
-    report = generate_report(context, top_rows)
+    news_interpretations = None
+    if args.with_news:
+        news_limit = int(config["reports"].get("news_limit_per_symbol", 3))
+        news_target_count = int(config["reports"].get("news_target_count", 10))
+        news_rows = top_rows[:news_target_count]
+        news_by_symbol = collect_news(news_rows, args.market, news_limit)
+        news_interpretations = interpret_all(news_rows, news_by_symbol)
+    report = generate_report(context, top_rows, news_interpretations)
 
     output_root = project_root() / config["reports"]["output_dir"] / args.market
     output_root.mkdir(parents=True, exist_ok=True)
@@ -49,6 +58,7 @@ def main() -> None:
     report_parser.add_argument("--market", choices=["us", "kr"], required=True)
     report_parser.add_argument("--date", help="Report date in YYYY-MM-DD format.")
     report_parser.add_argument("--sample", action="store_true", help="Use built-in sample data.")
+    report_parser.add_argument("--with-news", action="store_true", help="Add Google News RSS based interpretation.")
     report_parser.add_argument("--config", type=Path, default=default_config_path())
 
     args = parser.parse_args()
@@ -59,4 +69,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

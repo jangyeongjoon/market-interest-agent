@@ -1,5 +1,5 @@
 .venv/
+.mplconfig/
 __pycache__/
 *.pyc
 reports/
-
