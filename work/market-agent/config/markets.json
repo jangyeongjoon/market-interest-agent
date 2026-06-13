@@ -1,0 +1,85 @@
+{
+  "reports": {
+    "top_n": 50,
+    "language": "ko",
+    "output_dir": "reports"
+  },
+  "us": {
+    "universe": {
+      "mode": "static",
+      "tickers": [
+        "AAPL",
+        "MSFT",
+        "NVDA",
+        "AMZN",
+        "META",
+        "GOOGL",
+        "AVGO",
+        "TSLA",
+        "AMD",
+        "NFLX",
+        "JPM",
+        "COST",
+        "LLY",
+        "XOM",
+        "V",
+        "MA",
+        "ORCL",
+        "PLTR",
+        "SMCI",
+        "MU",
+        "TSM",
+        "ASML",
+        "ARM",
+        "QCOM",
+        "INTC",
+        "CRM",
+        "SHOP",
+        "COIN",
+        "MSTR",
+        "MARA"
+      ]
+    },
+    "sector_map": {
+      "AAPL": "Technology",
+      "MSFT": "Technology",
+      "NVDA": "Semiconductors",
+      "AMZN": "Consumer Internet",
+      "META": "Communication Services",
+      "GOOGL": "Communication Services",
+      "AVGO": "Semiconductors",
+      "TSLA": "EV",
+      "AMD": "Semiconductors",
+      "NFLX": "Communication Services",
+      "JPM": "Financials",
+      "COST": "Consumer Staples",
+      "LLY": "Healthcare",
+      "XOM": "Energy",
+      "V": "Payments",
+      "MA": "Payments",
+      "ORCL": "Software",
+      "PLTR": "AI Software",
+      "SMCI": "AI Infrastructure",
+      "MU": "Memory",
+      "TSM": "Semiconductors",
+      "ASML": "Semiconductor Equipment",
+      "ARM": "Semiconductors",
+      "QCOM": "Semiconductors",
+      "INTC": "Semiconductors",
+      "CRM": "Software",
+      "SHOP": "Consumer Internet",
+      "COIN": "Crypto",
+      "MSTR": "Crypto",
+      "MARA": "Crypto"
+    }
+  },
+  "kr": {
+    "universe": {
+      "mode": "pykrx_all"
+    },
+    "market_names": [
+      "KOSPI",
+      "KOSDAQ"
+    ]
+  }
+}
