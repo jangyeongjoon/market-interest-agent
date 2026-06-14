@@ -170,7 +170,7 @@ def generate_report(
             "",
             f"## {section_number}. 종목별 밸류에이션 점검",
             "",
-            "| 종목 | PER | Forward PER | PBR | EV/Sales | 순이익률 | ROE | 목표가 괴리율 | 해석 |",
+            "| 종목 | PER | 선행 PER | PBR | EV/Sales | 순이익률 | ROE | 목표가 괴리율 | 해석 |",
             "|---|---:|---:|---:|---:|---:|---:|---:|---|",
         ]
         for _rank, row, _score in ranked[:10]:
