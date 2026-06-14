@@ -43,6 +43,7 @@ class NewsItem:
 class NewsInterpretation:
     symbol: str
     direction: str
+    headline_summary: str
     summary: str
     confidence: str
     items: List[NewsItem]

@@ -2,6 +2,7 @@ from collections import defaultdict
 from typing import Dict, Iterable, List, Optional, Tuple
 
 from .models import MarketRow, NewsInterpretation, ReportContext
+from .news import summarize_market_news
 from .scoring import ranked_with_scores
 
 
@@ -104,16 +105,25 @@ def generate_report(
     if context.with_news:
         lines += [
             "",
-            "## 4. 뉴스 기반 상승/하락 해석",
+            "## 4. 포함 뉴스 전체 요약",
             "",
         ]
         interpretations = news_interpretations or {}
+        for bullet in summarize_market_news([row for _rank, row, _score in ranked[:10]], interpretations):
+            lines.append(f"- {bullet}")
+
+        lines += [
+            "",
+            "## 5. 종목별 뉴스 요약 및 상승/하락 해석",
+            "",
+        ]
         for rank, row, score in ranked[:10]:
             interpretation = interpretations.get(row.symbol)
             if interpretation is None:
                 lines.append(f"### {row.name} ({row.symbol})")
                 lines.append("")
-                lines.append("- 해석: 뉴스가 수집되지 않았습니다.")
+                lines.append("- 뉴스 요약: 뉴스가 수집되지 않았습니다.")
+                lines.append("- 가격 해석: 뉴스가 수집되지 않았습니다.")
                 lines.append("- 신뢰도: 낮음")
                 lines.append("")
                 continue
@@ -121,9 +131,10 @@ def generate_report(
             lines.append("")
             lines.append(f"- 등락률: {format_pct(row.change_pct)}")
             lines.append(f"- 방향: {interpretation.direction}")
-            lines.append(f"- 해석: {interpretation.summary}")
+            lines.append(f"- 뉴스 요약: {interpretation.headline_summary}")
+            lines.append(f"- 가격 해석: {interpretation.summary}")
             lines.append(f"- 신뢰도: {interpretation.confidence}")
-            lines.append("- 관련 뉴스:")
+            lines.append("- 포함 뉴스:")
             for item in interpretation.items[:3]:
                 if item.link:
                     lines.append(f"  - [{item.title}]({item.link}) - {item.source}")
@@ -133,7 +144,7 @@ def generate_report(
 
     lines += [
         "",
-        f"## {5 if context.with_news else 4}. 다음 체크 포인트",
+        f"## {6 if context.with_news else 4}. 다음 체크 포인트",
         "",
         "- 거래대금 상위 종목이 같은 섹터에 반복적으로 몰리는지 확인합니다.",
         "- 거래대금 증가와 가격 상승이 동시에 나타나는 종목을 우선 관찰합니다.",
