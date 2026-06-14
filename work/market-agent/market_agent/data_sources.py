@@ -37,10 +37,12 @@ def fetch_us_rows(report_date: str, config: Dict) -> List[MarketRow]:
             continue
         current = hist.iloc[-1]
         previous = hist.iloc[-2] if len(hist) > 1 else None
-        close = float(current["Close"])
-        volume = float(current["Volume"])
-        prev_close = float(previous["Close"]) if previous is not None else close
-        traded_value_prev = float(previous["Close"] * previous["Volume"]) if previous is not None else None
+        close = numeric_cell(current, "Close")
+        volume = numeric_cell(current, "Volume")
+        prev_close = numeric_cell(previous, "Close") if previous is not None else close
+        traded_value_prev = (
+            numeric_cell(previous, "Close") * numeric_cell(previous, "Volume") if previous is not None else None
+        )
         rows.append(
             MarketRow(
                 symbol=ticker,
@@ -94,3 +96,9 @@ def fetch_kr_rows(report_date: str, config: Dict) -> List[MarketRow]:
 def top_by_traded_value(rows: Iterable[MarketRow], top_n: int) -> List[MarketRow]:
     return sorted(rows, key=lambda row: row.traded_value, reverse=True)[:top_n]
 
+
+def numeric_cell(row, column: str) -> float:
+    value = row[column]
+    if hasattr(value, "iloc"):
+        value = value.iloc[0]
+    return float(value)

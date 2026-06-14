@@ -4,7 +4,8 @@
     "language": "ko",
     "output_dir": "reports",
     "news_target_count": 10,
-    "news_limit_per_symbol": 3
+    "news_limit_per_symbol": 3,
+    "valuation_target_count": 10
   },
   "us": {
     "universe": {

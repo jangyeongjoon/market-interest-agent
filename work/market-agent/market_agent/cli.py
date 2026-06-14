@@ -7,6 +7,7 @@ from .data_sources import fetch_market_rows, top_by_traded_value
 from .models import ReportContext
 from .news import collect_news, interpret_all
 from .report import generate_report
+from .valuation import collect_valuations
 
 
 KST = timezone(timedelta(hours=9))
@@ -26,6 +27,8 @@ def build_report(args: argparse.Namespace) -> Path:
     report_date = args.date or default_report_date()
     rows = fetch_market_rows(args.market, report_date, config, args.sample)
     top_rows = top_by_traded_value(rows, top_n)
+    valuation_target_count = int(config["reports"].get("valuation_target_count", 10))
+    valuations = collect_valuations(top_rows[:valuation_target_count], args.market, report_date, args.sample)
     context = ReportContext(
         market=args.market,
         market_label=market_label(args.market),
@@ -41,7 +44,7 @@ def build_report(args: argparse.Namespace) -> Path:
         news_rows = top_rows[:news_target_count]
         news_by_symbol = collect_news(news_rows, args.market, news_limit)
         news_interpretations = interpret_all(news_rows, news_by_symbol)
-    report = generate_report(context, top_rows, news_interpretations)
+    report = generate_report(context, top_rows, news_interpretations, valuations)
 
     output_root = project_root() / config["reports"]["output_dir"] / args.market
     output_root.mkdir(parents=True, exist_ok=True)

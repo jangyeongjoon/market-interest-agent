@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import Dict, Iterable, List, Optional, Tuple
 
-from .models import MarketRow, NewsInterpretation, ReportContext
+from .models import MarketRow, NewsInterpretation, ReportContext, ValuationMetrics
 from .news import summarize_market_news
 from .scoring import ranked_with_scores
 
@@ -18,6 +18,24 @@ def format_money(value: float, market: str) -> str:
 
 def format_pct(value: float) -> str:
     return f"{value:+.2f}%"
+
+
+def format_optional_number(value: Optional[float], suffix: str = "", precision: int = 1) -> str:
+    if value is None:
+        return "-"
+    return f"{value:,.{precision}f}{suffix}"
+
+
+def format_optional_pct(value: Optional[float]) -> str:
+    if value is None:
+        return "-"
+    return f"{value:+.1f}%"
+
+
+def target_upside(row: MarketRow, valuation: ValuationMetrics) -> Optional[float]:
+    if valuation.target_mean_price is None or row.close <= 0:
+        return None
+    return (valuation.target_mean_price / row.close - 1.0) * 100.0
 
 
 def sector_summary(rows: Iterable[MarketRow], market: str) -> List[Tuple[str, int, float, float]]:
@@ -37,6 +55,7 @@ def generate_report(
     context: ReportContext,
     rows: List[MarketRow],
     news_interpretations: Optional[Dict[str, NewsInterpretation]] = None,
+    valuations: Optional[Dict[str, ValuationMetrics]] = None,
 ) -> str:
     ranked = ranked_with_scores(rows)
     source_label = "샘플 데이터" if context.sample else "무료 API 데이터"
@@ -49,6 +68,7 @@ def generate_report(
         f"- 목적: 투자 아이디어 발굴",
         f"- 선별 기준: 거래대금 상위 {context.top_n}개",
         f"- 뉴스 해석: {'포함' if context.with_news else '미포함'}",
+        "- 밸류에이션: 포함(무료 데이터 제공 시)",
         "",
         "## 1. 시장 관심 요약",
         "",
@@ -142,9 +162,41 @@ def generate_report(
                     lines.append(f"  - {item.title} - {item.source}")
             lines.append("")
 
+    valuation_map = valuations or {}
+    valuation_section_added = bool(valuation_map)
+    if valuation_section_added:
+        section_number = 6 if context.with_news else 4
+        lines += [
+            "",
+            f"## {section_number}. 종목별 밸류에이션 점검",
+            "",
+            "| 종목 | PER | Forward PER | PBR | EV/Sales | 순이익률 | ROE | 목표가 괴리율 | 해석 |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---|",
+        ]
+        for _rank, row, _score in ranked[:10]:
+            valuation = valuation_map.get(row.symbol)
+            if not valuation:
+                continue
+            lines.append(
+                f"| {row.name} ({row.symbol}) | "
+                f"{format_optional_number(valuation.trailing_pe)} | "
+                f"{format_optional_number(valuation.forward_pe)} | "
+                f"{format_optional_number(valuation.price_to_book)} | "
+                f"{format_optional_number(valuation.ev_to_sales)} | "
+                f"{format_optional_pct(valuation.profit_margin_pct)} | "
+                f"{format_optional_pct(valuation.roe_pct)} | "
+                f"{format_optional_pct(target_upside(row, valuation))} | "
+                f"{valuation.summary} |"
+            )
+        lines += [
+            "",
+            "- PER/PBR은 업종별 적정 구간이 다르므로 같은 섹터 내 비교가 우선입니다.",
+            "- 목표가 괴리율은 무료 데이터 제공 시에만 표시되며, 애널리스트 추정치 갱신 시점이 다를 수 있습니다.",
+        ]
+
     lines += [
         "",
-        f"## {6 if context.with_news else 4}. 다음 체크 포인트",
+        f"## {next_section_number(context.with_news, valuation_section_added)}. 다음 체크 포인트",
         "",
         "- 거래대금 상위 종목이 같은 섹터에 반복적으로 몰리는지 확인합니다.",
         "- 거래대금 증가와 가격 상승이 동시에 나타나는 종목을 우선 관찰합니다.",
@@ -157,3 +209,12 @@ def generate_report(
     ]
 
     return "\n".join(lines)
+
+
+def next_section_number(with_news: bool, with_valuation: bool) -> int:
+    number = 4
+    if with_news:
+        number = 6
+    if with_valuation:
+        number += 1
+    return number

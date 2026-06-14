@@ -5,6 +5,7 @@
 - 목적: 투자 아이디어 발굴
 - 선별 기준: 거래대금 상위 50개
 - 뉴스 해석: 포함
+- 밸류에이션: 포함(무료 데이터 제공 시)
 
 ## 1. 시장 관심 요약
 
@@ -104,13 +105,13 @@
 
 - 등락률: +0.16%
 - 방향: 상승
-- 뉴스 요약: NVDA 관련 뉴스는 AI/반도체, 모멘텀/트레이딩 중심으로 묶입니다. 주요 헤드라인은 Nvidia (NVDA) Stock: Can Robotics Spark a New Rally? / Goldman says stocks like Nvidia have more room to run / Nvidia CEO Jensen Huang Says This Will Be the Next $1 Trillion Company입니다.
+- 뉴스 요약: NVDA 관련 뉴스는 AI/반도체, 모멘텀/트레이딩 중심으로 묶입니다. 주요 헤드라인은 Nvidia (NVDA) Stock: Can Robotics Spark a New Rally? / Nvidia Stock Just Did Something for the First Time in More Than 5 Years. Here's What History Says Happens Next. / Prediction: Nvidia Set to Hit $250 on This Date입니다.
 - 가격 해석: 주가 상승과 함께 긍정 키워드(rally)가 포함된 뉴스가 확인됩니다. 대표 뉴스는 'Nvidia (NVDA) Stock: Can Robotics Spark a New Rally? - Barron's'입니다.
 - 신뢰도: 중간
 - 포함 뉴스:
   - [Nvidia (NVDA) Stock: Can Robotics Spark a New Rally? - Barron's](https://news.google.com/rss/articles/CBMicEFVX3lxTE4zcjNSOVFEWENrenoxTUE0a3VEaF9zSFdaZnNwYXNZSU9Pa0FyMnpoVHpSdnNhVHR3SnlpV2RTblBhMHhOS2J4dkI2eWpTWlROckQ1Q2swUW5odEhKYjBKTFNRajlxUWU0dzRoQkVld2U?oc=5) - Barron's
-  - [Goldman says stocks like Nvidia have more room to run - CNBC](https://news.google.com/rss/articles/CBMiiwFBVV95cUxONk9DVWhlSXVwdXlzODljdm5EeXVJcFR5b0kzMXZLUHcxVkhIbFphWjlMdkdBMkF0cEt5Qk1IVGw5dkZqcU40eWpXaXNpbTVMTVdkRHRZR19hVUhudGU5UE9CanNVVWxESlF5RlMwX3owTWR2ejBWXzVFaERsRVJtTzRWY0M5cGpWU24w?oc=5) - CNBC
-  - [Nvidia CEO Jensen Huang Says This Will Be the Next $1 Trillion Company - The Motley Fool](https://news.google.com/rss/articles/CBMimAFBVV95cUxNSUxqTnZRX20wR3I3ei03UlRRczB5aEM4djV1UHg1RjA5dXRweG1JWV9ROFdWUVNaTXdPLTVJSUpLUWV1ZEluN0FYaV80QW84MW5JUVk2TTdDWlRGOHhueENqaVdSeHoyYnNob20wRjZ3aU1NaFVMck5UUGhpa3JJNm1yUTNaT3Y5YTk5YlVMTVJ6NzhaNXMyVg?oc=5) - The Motley Fool
+  - [Nvidia Stock Just Did Something for the First Time in More Than 5 Years. Here's What History Says Happens Next. - Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxON2VyaTZXblE1QmcxMW5JdmV2OVlHNVplMUJHNE1jcV9xYk5UdlhRTFFlYnR5X3pYbFZ2LXpXTXhoaEdCUGVBNmI1TENnelhad3UyT2lFTEpSS2haVGRleTM2VkpNZXhBNWJZLVJBaUQyT0JwVmhIX1kwNjJwaWxsMTFnOVJjRlNFamNWUmphMWVuR0VZTWJHYkJUOEk?oc=5) - Yahoo Finance
+  - [Prediction: Nvidia Set to Hit $250 on This Date - 24/7 Wall St.](https://news.google.com/rss/articles/CBMikwFBVV95cUxQSU10eHl4NUZKRy1GbmJWQVRxQ2FNaEtGazQyZnd4dzQ1T1JfY3FsUDJ1V0dCeFd5VnlOX3IxQk96cThEZklfZUJFRFY4ZWd1MWFJTmUzTTI5REg2ZlhqOW5rakFIVjVLRmZlWFRfTDdoNUl2d094S0t2ZmMyclRqR04wWThMODg5LW0tWUlYUlpfZXM?oc=5) - 24/7 Wall St.
 
 ### INTC (INTC)
 
@@ -188,16 +189,34 @@
 
 - 등락률: +0.53%
 - 방향: 상승
-- 뉴스 요약: GOOGL 관련 뉴스는 클라우드/플랫폼, 모멘텀/트레이딩 중심으로 묶입니다. 주요 헤드라인은 Alphabet (GOOGL) Stock Falls Amid Market Uptick: What Investors Need to Know / Prediction: Google Stock Will Hit $500 on This Date / Does Google Stock Have More Upside?입니다.
+- 뉴스 요약: GOOGL 관련 뉴스는 클라우드/플랫폼, 모멘텀/트레이딩 중심으로 묶입니다. 주요 헤드라인은 Alphabet (GOOGL) Stock Falls Amid Market Uptick: What Investors Need to Know / Prediction: Google Stock Will Hit $500 on This Date / Alphabet Inc. $GOOGL Stock Position Lessened by Klingenstein Fields & Co. LP입니다.
 - 가격 해석: 주가는 상승했지만 뉴스 제목만으로 직접적인 긍정 촉매는 강하게 확인되지 않습니다. 대표 뉴스는 'Alphabet (GOOGL) Stock Falls Amid Market Uptick: What Investors Need to Know - Yahoo Finance'입니다.
 - 신뢰도: 낮음
 - 포함 뉴스:
   - [Alphabet (GOOGL) Stock Falls Amid Market Uptick: What Investors Need to Know - Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxPX3JkbGhmWWNKNUwwUlVuV20xdWtGV1UzOEZMSkZpS0tQVi1OdXlVcHdIVnVxV0l3YkNDYjVtVFItMERrbWpybHlTQ2hOazhYdTVJZktFQnlBbnRjbVRSTmZoaFNra2h2QjJ0ckQxRFZFN0pnYmFUcGtjQW5OZ3BITFlEVExINlhySDl3d1FyZzAycDNDc0xvMWVYbEU?oc=5) - Yahoo Finance
   - [Prediction: Google Stock Will Hit $500 on This Date - 24/7 Wall St.](https://news.google.com/rss/articles/CBMimAFBVV95cUxOdlNfNWRhRzY5WkluYkpRM1BVSldLbkZ6cUwyTDY1VzV6QndfalN3WmVyZDM0Y2cwOG1hM1lTNG5nZm9KM2dBeWxvXzZ6VE9UTGYxSlZLX0xodlFQaDFIT2Vzc0lGOHFHclpHNDc4bWJHQXgtN1FnVFVOSEVURWNObnVidFpxT3hvbW82WVlLdi1wbGR3b2VuMA?oc=5) - 24/7 Wall St.
-  - [Does Google Stock Have More Upside? - Trefis](https://news.google.com/rss/articles/CBMinAFBVV95cUxPRHo2RWN0b1lwOGV4Z3hDSXpDU2ppUVdSbXI5ZEtKTGZKYncySkZHMEF2b1FYOUo3WFBVUW9KcmJ2amNmUkNMb3NER21hVUFONGNkLVhMSUk3ZUMycmZRcjloSGR4U3FRX0tjTmNpcHM2TUNfdzg4SWhkeUdfbGZBMHFHTGFzMWxXVGFVZjBfRVBvSFVUR3YwOGltYlU?oc=5) - Trefis
+  - [Alphabet Inc. $GOOGL Stock Position Lessened by Klingenstein Fields & Co. LP - MarketBeat](https://news.google.com/rss/articles/CBMizAFBVV95cUxPQzNPZEZwelZvVTNoV2kwQnlhcFNqUURlR3hFUXB4ZWp1QlV1dnVyZE83TkloS2dNOGlGbGNaTDRpTGNJVjVHV3BEalhSdjdMLVBXS0M2V0czcnA0OEttSTBuTVFnd2FUX09MOE9zWElYaXFXY2ltaHpZdk1XVWpPYVBjSFNLQzZweVdmUVFvV2dKM1FmdUs1cGhLTHVpSjNuZFJFR1FOMVVmZzBMNUhfREl0Q2tVVGVLVDNsYzNvcm92bHhETmRpb1VtaWM?oc=5) - MarketBeat
 
 
-## 6. 다음 체크 포인트
+## 6. 종목별 밸류에이션 점검
+
+| 종목 | PER | Forward PER | PBR | EV/Sales | 순이익률 | ROE | 목표가 괴리율 | 해석 |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| MU (MU) | 46.3 | 8.8 | 15.3 | 19.0 | +41.5% | +39.8% | -15.6% | PER 기준 저평가 후보, PBR 부담이 큰 편, 수익성은 높은 편, 하락 시 저가 매수 후보로 재점검 가능. |
+| TSLA (TSLA) | 369.5 | 162.6 | 18.6 | 15.3 | +3.9% | +4.9% | +3.5% | PER 기준 성장 기대가 많이 반영된 구간, PBR 부담이 큰 편, 수익성 확인 필요, 상승 추격 전 실적 성장 확인 필요. |
+| NVDA (NVDA) | 31.4 | 16.1 | 25.4 | 19.4 | +63.0% | +1.1% | +45.7% | PER 기준 중립 구간, PBR 부담이 큰 편, 수익성은 높은 편. |
+| INTC (INTC) | - | 80.8 | 5.6 | 12.1 | -5.9% | -2.9% | -25.2% | PER 기준 성장 기대가 많이 반영된 구간, 수익성 확인 필요, 상승 추격 전 실적 성장 확인 필요. |
+| AMD (AMD) | 169.4 | 39.0 | 12.9 | 22.0 | +13.4% | +8.1% | -4.9% | PER 기준 중립 구간, PBR 부담이 큰 편. |
+| MSFT (MSFT) | 23.3 | 20.2 | 7.0 | 9.3 | +39.3% | +34.0% | +43.7% | PER 기준 중립 구간, 수익성은 높은 편. |
+| AMZN (AMZN) | 31.6 | 24.2 | 5.8 | 3.6 | +12.2% | +24.3% | +31.0% | PER 기준 중립 구간. |
+| AAPL (AAPL) | 35.2 | 30.3 | 40.1 | 9.5 | +27.2% | +1.4% | +7.4% | PER 기준 중립 구간, PBR 부담이 큰 편, 수익성은 높은 편. |
+| AVGO (AVGO) | 63.7 | 19.7 | 20.7 | 24.7 | +38.8% | +37.3% | +36.6% | PER 기준 중립 구간, PBR 부담이 큰 편, 수익성은 높은 편. |
+| GOOGL (GOOGL) | 27.5 | 24.8 | 9.1 | 10.2 | +37.9% | +38.9% | +20.3% | PER 기준 중립 구간, 수익성은 높은 편. |
+
+- PER/PBR은 업종별 적정 구간이 다르므로 같은 섹터 내 비교가 우선입니다.
+- 목표가 괴리율은 무료 데이터 제공 시에만 표시되며, 애널리스트 추정치 갱신 시점이 다를 수 있습니다.
+
+## 7. 다음 체크 포인트
 
 - 거래대금 상위 종목이 같은 섹터에 반복적으로 몰리는지 확인합니다.
 - 거래대금 증가와 가격 상승이 동시에 나타나는 종목을 우선 관찰합니다.
