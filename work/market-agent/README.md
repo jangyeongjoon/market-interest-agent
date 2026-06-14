@@ -8,7 +8,7 @@ Free-first stock market report agent for investment idea discovery.
 - 19:00 KST: Korean market report after the Korean session closes.
 - Screening target: top 50 names by traded value.
 - First signal: traded value and traded value change.
-- Valuation check: PER, forward PER(선행 PER), PBR, EV multiples, margins, ROE, target-price gap when available.
+- Valuation check: PER, forward PER(선행 PER), PBR, EV multiples, margins, ROE, FCF, FCF yield, target-price gap when available.
 - Output: Korean Markdown report.
 
 ## Data Sources

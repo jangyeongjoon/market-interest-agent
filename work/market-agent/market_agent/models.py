@@ -61,6 +61,8 @@ class ValuationMetrics:
     eps: Optional[float] = None
     profit_margin_pct: Optional[float] = None
     roe_pct: Optional[float] = None
+    free_cash_flow: Optional[float] = None
+    fcf_yield_pct: Optional[float] = None
     dividend_yield_pct: Optional[float] = None
     target_mean_price: Optional[float] = None
     recommendation: Optional[str] = None

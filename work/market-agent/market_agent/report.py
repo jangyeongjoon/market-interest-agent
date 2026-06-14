@@ -7,13 +7,15 @@ from .scoring import ranked_with_scores
 
 
 def format_money(value: float, market: str) -> str:
+    sign = "-" if value < 0 else ""
+    absolute = abs(value)
     if market == "us":
-        if value >= 1_000_000_000:
-            return f"${value / 1_000_000_000:,.1f}B"
-        return f"${value / 1_000_000:,.1f}M"
-    if value >= 1_000_000_000_000:
-        return f"{value / 1_000_000_000_000:,.2f}조원"
-    return f"{value / 100_000_000:,.0f}억원"
+        if absolute >= 1_000_000_000:
+            return f"{sign}${absolute / 1_000_000_000:,.1f}B"
+        return f"{sign}${absolute / 1_000_000:,.1f}M"
+    if absolute >= 1_000_000_000_000:
+        return f"{sign}{absolute / 1_000_000_000_000:,.2f}조원"
+    return f"{sign}{absolute / 100_000_000:,.0f}억원"
 
 
 def format_pct(value: float) -> str:
@@ -30,6 +32,12 @@ def format_optional_pct(value: Optional[float]) -> str:
     if value is None:
         return "-"
     return f"{value:+.1f}%"
+
+
+def format_optional_money(value: Optional[float], market: str) -> str:
+    if value is None:
+        return "-"
+    return format_money(value, market)
 
 
 def target_upside(row: MarketRow, valuation: ValuationMetrics) -> Optional[float]:
@@ -170,8 +178,8 @@ def generate_report(
             "",
             f"## {section_number}. 종목별 밸류에이션 점검",
             "",
-            "| 종목 | PER | 선행 PER | PBR | EV/Sales | 순이익률 | ROE | 목표가 괴리율 | 해석 |",
-            "|---|---:|---:|---:|---:|---:|---:|---:|---|",
+            "| 종목 | PER | 선행 PER | PBR | EV/Sales | 순이익률 | ROE | FCF | FCF 수익률 | 목표가 괴리율 | 해석 |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
         ]
         for _rank, row, _score in ranked[:10]:
             valuation = valuation_map.get(row.symbol)
@@ -185,12 +193,15 @@ def generate_report(
                 f"{format_optional_number(valuation.ev_to_sales)} | "
                 f"{format_optional_pct(valuation.profit_margin_pct)} | "
                 f"{format_optional_pct(valuation.roe_pct)} | "
+                f"{format_optional_money(valuation.free_cash_flow, context.market)} | "
+                f"{format_optional_pct(valuation.fcf_yield_pct)} | "
                 f"{format_optional_pct(target_upside(row, valuation))} | "
                 f"{valuation.summary} |"
             )
         lines += [
             "",
             "- PER/PBR은 업종별 적정 구간이 다르므로 같은 섹터 내 비교가 우선입니다.",
+            "- FCF 수익률은 잉여현금흐름을 시가총액으로 나눈 값이며, 높을수록 현금창출력 대비 가격 부담이 낮다고 볼 수 있습니다.",
             "- 목표가 괴리율은 무료 데이터 제공 시에만 표시되며, 애널리스트 추정치 갱신 시점이 다를 수 있습니다.",
         ]
 
